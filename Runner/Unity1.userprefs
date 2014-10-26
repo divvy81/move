@@ -1,0 +1,21 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DelegateMenu.cs">
+    <Files>
+      <File FileName="Assets\Scripts\playermovement.cs" Line="251" Column="15" />
+      <File FileName="Assets\Scripts\coindelete.cs" Line="183" Column="17" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="..\Users\ankit\Downloads\playermovement (2).cs" Line="271" Column="2" />
+      <File FileName="Assets\Scripts\playermovement1.cs" Line="255" Column="20" />
+      <File FileName="Assets\Scripts\playermovement2.cs" Line="246" Column="20" />
+      <File FileName="Assets\Scripts\playermovement3.cs" Line="252" Column="20" />
+      <File FileName="Assets\Scripts\highscore.cs" Line="60" Column="25" />
+      <File FileName="Assets\Scripts\DelegateMenu1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DelegateMenu.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
