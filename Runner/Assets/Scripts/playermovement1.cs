@@ -7,7 +7,7 @@ public class playermovement1 : MonoBehaviour
 {
 	
 	//private Rect windowRect = new Rect (Screen.width/2, 40, 120, 50);
-	public static float speed = 10.0f;
+	public static float speed = 1.0f;
 	public static string scoreText="Score : 0";
 	public string speedText="Speed :10 km/h";
 	public string Distance="Distance : 0 km";
@@ -45,10 +45,14 @@ public class playermovement1 : MonoBehaviour
 	int runHash = Animator.StringToHash("Run");
 	int movingBackHash=Animator.StringToHash("Moving_back");
 	int movingFrontHash=Animator.StringToHash("Moving_front");
+	public float start_distance_for_speed_upgrade = 0.0f;
+	public float max_distance_before_speed_upgrade;
+	int collision_count;
 	//junaid
 	public static int LeftCount,RightCount,DownCount,UpCount;
 	void Start()
 	{
+		max_distance_before_speed_upgrade = 200.0f;
 		anim = GetComponent<Animator>();
 		//animation.playAutomatically = true;
 		//		sp.Open();
@@ -69,7 +73,20 @@ public class playermovement1 : MonoBehaviour
 			UpCount++;
 		if(Input.GetKeyUp("down"))
 			DownCount++;
-		
+		if (this.transform.position.z - start_distance_for_speed_upgrade > max_distance_before_speed_upgrade) {
+						check_speed_upgrade ();
+				}
+	}
+	void check_speed_upgrade()
+	{
+		if (collision_count == 0) {
+				//upgrade_speed
+			anim.speed += 0.04f;
+		} else {
+				// player is colliding, degrade speed
+			anim.speed -= 0.04f;
+		}
+		start_distance_for_speed_upgrade = this.transform.position.z;
 	}
 	void FixedUpdate () {
 		

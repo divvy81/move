@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\UnitySampleProjects\LoginTry\Assets\Scripts\LoginMenu.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\playermovement1.cs">
     <Files>
-      <File FileName="..\..\UnitySampleProjects\LoginTry\Assets\Scripts\LoginMenu.cs" Line="27" Column="28" />
+      <File FileName="Assets\Scripts\playermovement1.cs" Line="88" Column="3" />
+      <File FileName="Assets\Scripts\GameObjectController.cs" Line="51" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

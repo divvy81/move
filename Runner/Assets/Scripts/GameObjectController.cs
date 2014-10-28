@@ -39,7 +39,7 @@ public class GameObjectController : MonoBehaviour {
 				next_x = getNew_x ();
 				next_y = 0.45f; //default height for game objects
 				next_z = getNew_z ();
-				Debug.Log ("value of z is " + next_z);
+				//Debug.Log ("value of z is " + next_z);
 				int next_object_index = Random.Range (0, items.Length);
 				if(next_object_index == 0 )
 				{
