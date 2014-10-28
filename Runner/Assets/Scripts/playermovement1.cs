@@ -238,7 +238,7 @@ public class playermovement1 : MonoBehaviour
 		GUI.Box(new Rect(0, Screen.height - 120,140,55), "", GUI.skin.FindStyle("Box"));
 		
 		GUI.Label (new Rect(100, Screen.height - 50,100,400), "" + Mathf.Round(speed) , style1);
-		Debug.Log ("value of speed is " + speed);
+		//Debug.Log ("value of speed is " + speed);
 		GUI.Label (new Rect(40, Screen.height - 50,100,400),"KM/H : ");
 		GUI.Box(new Rect(Screen.width - 250, Screen.height - 120,250,55), "", GUI.skin.FindStyle("Box"));
 		GUI.Label (new Rect(Screen.width -150, Screen.height - 50,100,400), "" + Mathf.Round(caldis), style1);
