@@ -7,7 +7,7 @@ public class playermovement1 : MonoBehaviour
 {
 	
 	//private Rect windowRect = new Rect (Screen.width/2, 40, 120, 50);
-	public static float speed = 1.0f;
+	public static float speed = 0.0f;
 	public static string scoreText="Score : 0";
 	public string speedText="Speed :10 km/h";
 	public string Distance="Distance : 0 km";
@@ -21,7 +21,7 @@ public class playermovement1 : MonoBehaviour
 	private bool right = false;
 	public GUISkin theskin;
 	public GUISkin myskin ;
-	public float maxspeed = 30.0f;
+	//public float maxspeed = 30.0f;
 	public static bool paused = false;
 	public static int leftturn=0;
 	private bool check = false;
@@ -40,16 +40,16 @@ public class playermovement1 : MonoBehaviour
 	public int min = 0;
 	public int hrs=0;
 	public static string t;
-	Animator anim;
-	int idleHash = Animator.StringToHash("Idle");
-	int runHash = Animator.StringToHash("Run");
-	int movingBackHash=Animator.StringToHash("Moving_back");
-	int movingFrontHash=Animator.StringToHash("Moving_front");
+	public static Animator anim;
+	public static int runHash = Animator.StringToHash("Run");
 	public float start_distance_for_speed_upgrade = 0.0f;
 	public float max_distance_before_speed_upgrade;
-	int collision_count;
+	bool moving_back = false;
+	public static int collision_count;
+	public static Vector3 Collision_point = new Vector3(0.0f,0.0f,-20.0f);
 	//junaid
 	public static int LeftCount,RightCount,DownCount,UpCount;
+	private float max_speed = 1.0f;
 	void Start()
 	{
 		max_distance_before_speed_upgrade = 200.0f;
@@ -76,12 +76,26 @@ public class playermovement1 : MonoBehaviour
 		if (this.transform.position.z - start_distance_for_speed_upgrade > max_distance_before_speed_upgrade) {
 						check_speed_upgrade ();
 				}
+		if ((Collision_point.z - this.transform.position.z >= 4.0f) && (moving_back == true)){
+		
+			anim.speed=0.0f;
+			anim.SetBool (runHash,false);
+			//anim.Play("Idle");
+			moving_back = false;
+		}
+		/*if ((Collision_point.z - this.transform.position.z >= 1.0f) && 
+		 	(Collision_point.z - this.transform.position.z <= -3.0f)) {
+			anim.SetBool (runHash,true);
+
+			anim.speed = max_speed;
+		}*/
 	}
 	void check_speed_upgrade()
 	{
 		if (collision_count == 0) {
 				//upgrade_speed
 			anim.speed += 0.04f;
+			max_speed = anim.speed;
 		} else {
 				// player is colliding, degrade speed
 			anim.speed -= 0.04f;
@@ -153,14 +167,14 @@ public class playermovement1 : MonoBehaviour
 		vari = -2;
 		if( (Mathf.Round (vari) > 1)&& start== true) {
 			anim.SetBool (runHash,false);
-			anim.SetBool (idleHash,true);
+			//anim.SetBool (idleHash,true);
 			
 		}
 		if ((Mathf.Round (vari) < -1)){
 			if(start==true)
 			{
 				anim.SetBool (runHash,true);
-				anim.SetBool (idleHash,false);
+				//anim.SetBool (idleHash,false);
 				start = false;
 			}
 			//anim.Play("Run");
@@ -205,17 +219,28 @@ public class playermovement1 : MonoBehaviour
 			
 			
 		}
-		if((Input.GetKeyUp(KeyCode.DownArrow)== true)&& (anim.GetBool(runHash)==false) && (anim.GetBool(idleHash)==true) && (start==false))// run=false and idle=true and downarrow press
+		if((Input.GetKeyUp(KeyCode.DownArrow)== true)&& (anim.GetBool(runHash)==false)  && (start==false)
+		   && moving_back == false)// run=false and idle=true and downarrow press
 		{
-			anim.SetBool (movingBackHash,true);
-			anim.SetBool (movingFrontHash,false);
-			rigidbody.transform.Translate(new Vector3(0.0f, 0, -0.5f) );
+
+			anim.speed = -1.0f;
+			anim.SetBool (runHash,true);
+
+
+
+			//rigidbody.transform.Translate(new Vector3(0.0f, 0, -0.5f) );
+			moving_back = true;
 		}
-		if((Input.GetKeyUp(KeyCode.UpArrow)== true)&& (anim.GetBool(runHash)==false) && (anim.GetBool(idleHash)==true))// run=false and idle=true and downarrow press
+		if((Input.GetKeyUp(KeyCode.UpArrow)== true)&& (anim.GetBool(runHash)==false) )// run=false and idle=true and downarrow press
 		{
-			anim.SetBool (movingBackHash,false);
-			anim.SetBool (movingFrontHash,true);
-			rigidbody.transform.Translate(new Vector3(0.0f, 0, 0.5f));
+			//anim.SetBool (movingBackHash,false);
+			//anim.SetBool (movingFrontHash,true);
+			anim.speed = max_speed;
+
+			anim.SetBool (runHash,true);
+			//rigidbody.transform.Translate(new Vector3(0.0f, 0, 0.5f));
+
+			//anim.Play("Run");
 		}
 		speedText = "Speed :" +speed +"km/h";
 		caldis = this.transform.position.z;

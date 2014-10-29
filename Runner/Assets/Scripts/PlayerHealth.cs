@@ -7,12 +7,12 @@ public class PlayerHealth : MonoBehaviour {
 	public float currentHealth = 100.0f;
 	public bool collided=false;
 	public GameObject[] items; // for the fence around player.
-	Animator anim;
-	int idleHash = Animator.StringToHash("Idle");
-	int runHash = Animator.StringToHash("Run");
+	//Animator anim;
+	//int runHash = Animator.StringToHash("Run");
+	//int idleStateHash = Animator.StringToHash("Base Layer.Idle");
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent<Animator>();
+		//anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -26,28 +26,30 @@ public class PlayerHealth : MonoBehaviour {
 		if (other.gameObject.tag == "Obstacle") {
 			if(collided ==false)
 			{
+
+				playermovement1.collision_count++;
+				playermovement1.Collision_point = this.transform.position;
 				currentHealth -= 10.0f;
 				collided =true;
+				playermovement1.anim.SetBool (playermovement1.runHash,false);
+				playermovement1.anim.speed=0.0f;
+				//anim.StopPlayback("Run");
+				//anim.Play("Idle");
+				//anim.speed = 0.0f;
 			}
 			//Debug.Log("Collision");
 			if (currentHealth == 0) { 
-				//Debug.Log (score1);
-				
-				//storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
-				//getScores ();
-				//	reset1=reset1 +1 ;
-				//	Debug.Log ("Value of reset is :" + reset1);
-				
+
 				Application.LoadLevel ("gameover");
 			}
-				
-				anim.SetBool (runHash,false);
-				anim.SetBool (idleHash,true);
-				rigidbody.transform.Translate(new Vector3(0.0f, 0.0f,-1.0f) * 10 * Time.deltaTime);
-				playermovement1.speed =0.0f;
-				//Debug.Log(this.transform.position.z);
-				Instantiate (items [Random.Range (0, items.Length)], new Vector3 (this.transform.position.x, 0.45f,this.transform.position.z ), Quaternion.identity);
+
+			//rigidbody.transform.Translate(new Vector3(0.0f, 0.0f,-1.0f) * 10 * Time.deltaTime);
+			//Debug.Log(this.transform.position.z);
+			Instantiate (items [Random.Range (0, items.Length)], new Vector3 (this.transform.position.x, 0.45f,this.transform.position.z ), Quaternion.identity);
 			collided =false;
+			//anim.speed = -1.0f;
+
+
 			}
 		if (other.gameObject.tag == "HealthIcon") {
 						currentHealth += 10.0f;
