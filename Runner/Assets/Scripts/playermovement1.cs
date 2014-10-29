@@ -223,7 +223,7 @@ public class playermovement1 : MonoBehaviour
 		   && moving_back == false)// run=false and idle=true and downarrow press
 		{
 
-			anim.speed = -1.0f;
+			anim.speed = -0.5f;
 			anim.SetBool (runHash,true);
 
 

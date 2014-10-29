@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\GameObjectController.cs" />
      <Compile Include="Assets\Scripts\GameSetup.cs" />
      <Compile Include="Assets\Scripts\HS_controller.cs" />
+     <Compile Include="Assets\Scripts\HardwareInput.cs" />
      <Compile Include="Assets\Scripts\HealthIcon.cs" />
      <Compile Include="Assets\Scripts\Nsewobs_1.cs" />
      <Compile Include="Assets\Scripts\PickUpCollect.cs" />
