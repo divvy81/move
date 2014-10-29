@@ -53,7 +53,7 @@ public class coindelete :MonoBehaviour {
 			 distance1 = playermovement3.caldis.ToString ();
 			timeplayed = playermovement3.t;
 		}
-
+		//Debug.Log (GameObject.FindGameObjectWithTag ("Player").transform.position.z);
 		if (GameObject.FindGameObjectWithTag("Player").transform.position.z > transform.position.z) {
 			GameObjectController.no_of_objects-=1;
 			Destroy (gameObject);

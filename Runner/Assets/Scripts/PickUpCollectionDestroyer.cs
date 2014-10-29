@@ -10,7 +10,7 @@ public class PickUpCollectionDestroyer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//Debug.Log (GameObject.FindGameObjectWithTag ("Player").transform.position.z);
 		if (GameObject.FindGameObjectWithTag("Player").transform.position.z > transform.position.z + max_z_spread) {
 			GameObjectController.no_of_objects-=1;
 			Destroy (gameObject);

@@ -78,9 +78,9 @@ public class playermovement1 : MonoBehaviour
 				}
 		if ((Collision_point.z - this.transform.position.z >= 4.0f) && (moving_back == true)){
 		
-			anim.speed=0.0f;
+			anim.speed=1.0f;
 			anim.SetBool (runHash,false);
-			//anim.Play("Idle");
+			anim.Play("Idle");
 			moving_back = false;
 		}
 		/*if ((Collision_point.z - this.transform.position.z >= 1.0f) && 

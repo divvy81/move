@@ -13,10 +13,10 @@ public class CollisionFenceDelete : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(GameObject.FindGameObjectWithTag("Player").transform.position.z+ "Player");
+		//Debug.Log(GameObject.FindGameObjectWithTag("Player").transform.position.z+ "Player");
 		Debug.Log(transform.position.z+ "fence");
 		if (GameObject.FindGameObjectWithTag("Player").transform.position.z > transform.position.z + max_z_spread) {
-			Debug.Log("here");
+			//Debug.Log("here");
 
 			Destroy (gameObject);
 			
