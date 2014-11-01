@@ -19,7 +19,7 @@ public class EthanScript : MonoBehaviour
 		//float move = Input.GetAxis ("Vertical");
 		//anim.SetFloat("Speed", move);
 		
-		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+//		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			anim.SetBool (runStateHash, true);

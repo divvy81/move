@@ -4,7 +4,7 @@ using System.Collections;
 public class CollisionFenceDelete : MonoBehaviour {
 	private float max_z_spread;// how much player should run after this object starts to get deleted
 	Animator anim;
-	int runHash = Animator.StringToHash("Run");
+//	int runHash = Animator.StringToHash("Run");
 	// Use this for initialization
 	
 	void Start () {
@@ -17,8 +17,9 @@ public class CollisionFenceDelete : MonoBehaviour {
 		Debug.Log(transform.position.z+ "fence");
 		if (GameObject.FindGameObjectWithTag("Player").transform.position.z > transform.position.z + max_z_spread) {
 			//Debug.Log("here");
-
+			PlayerHealth.collided = false;
 			Destroy (gameObject);
+
 			
 		}
 	}

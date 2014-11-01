@@ -30,7 +30,7 @@ public class collectbonus : MonoBehaviour {
 
 			else if(DelegateMenu.lev == 2){
 				playermovement1.count += 1;
-				playermovement1.life = " X " + playermovement1.count;
+//				playermovement1.life = " X " + playermovement1.count;
 				//Destroy(gameObject);
 			}
 

@@ -12,7 +12,7 @@ public class TrackDestroyer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (GameObject.FindGameObjectWithTag("Player").transform.position.z > transform.position.z + max_z_spread) {
+		if (GameObject.FindGameObjectWithTag("Player").transform.position.z - 10.0f > transform.position.z + max_z_spread) {
 			GameObjectController.no_of_tracks-=1;
 			Destroy (gameObject);
 			

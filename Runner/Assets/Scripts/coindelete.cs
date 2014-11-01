@@ -76,7 +76,7 @@ public class coindelete :MonoBehaviour {
 		//count1 = playermovement.count.ToString ();
 	
 	}
-	void storescore(string userNamez, string score,string leftturn,string rightturn,string distance1,string time1,string timeplayed)
+/*	void storescore(string userNamez, string score,string leftturn,string rightturn,string distance1,string time1,string timeplayed)
 	{
 		Debug.Log(leftturn);
 		Debug.Log(rightturn);
@@ -90,8 +90,8 @@ public class coindelete :MonoBehaviour {
 		HttpWebResponse response =
 			(HttpWebResponse)connection.GetResponse();
 		
-		StreamReader sr =new StreamReader(response.GetResponseStream(),Encoding.UTF8);
-	}
+//		StreamReader sr =new StreamReader(response.GetResponseStream(),Encoding.UTF8);
+	}*/
 	void OnCollisionEnter(Collision coll)
 	{
 
@@ -105,7 +105,7 @@ public class coindelete :MonoBehaviour {
 						if (playermovement.count == 0) {
 								Debug.Log (score1);
 
-								storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
+//								storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
 								getScores ();
 							//	reset1=reset1 +1 ;
 							//	Debug.Log ("Value of reset is :" + reset1);
@@ -117,21 +117,21 @@ public class coindelete :MonoBehaviour {
 
 			else if (DelegateMenu.lev == 2){
 				playermovement1.count--;
-				playermovement1.life = " X " + playermovement1.count;
+				//playermovement1.life = " X " + playermovement1.count;
 				//PlayerHealth.currentHealth-=10;
 				//PlayerHealth.currentHealth -=10;
 				//playermovement.life = "Lives :" + playermovement.count;
-				if (playermovement1.count == 0) {
-					Debug.Log (score1);
+//				if (playermovement1.count == 0) {
+//					Debug.Log (score1);
 					
-					storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
-					getScores ();
+//					storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
+//					getScores ();
 					//	reset1=reset1 +1 ;
 					//	Debug.Log ("Value of reset is :" + reset1);
 					
-					Application.LoadLevel ("gameover");
+//					Application.LoadLevel ("gameover");
 					
-				}
+//				}
 			}
 
 			else if (DelegateMenu.lev == 3){
@@ -141,7 +141,7 @@ public class coindelete :MonoBehaviour {
 				if (playermovement2.count == 0) {
 					Debug.Log (score1);
 					
-					storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
+//					storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
 					getScores ();
 					//	reset1=reset1 +1 ;
 					//	Debug.Log ("Value of reset is :" + reset1);
@@ -158,7 +158,7 @@ public class coindelete :MonoBehaviour {
 				if (playermovement3.count == 0) {
 					Debug.Log (score1);
 					
-					storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
+//					storescore (hscontroller.userName, score1, lefturn1, rightturn1,distance1,time1,timeplayed);
 					getScores ();
 					//	reset1=reset1 +1 ;
 					//	Debug.Log ("Value of reset is :" + reset1);

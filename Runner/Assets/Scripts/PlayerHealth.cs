@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerHealth : MonoBehaviour {
 	private GUIStyle currentStyle = null;	
 	public float maxHealth =100.0f;
-	public float currentHealth = 100.0f;
-	public bool collided=false;
+	public float currentHealth = 10.0f;
+	public static bool collided=false;
 	public GameObject[] items; // for the fence around player.
 	//Animator anim;
 	//int runHash = Animator.StringToHash("Run");
@@ -26,27 +26,32 @@ public class PlayerHealth : MonoBehaviour {
 		if (other.gameObject.tag == "Obstacle") {
 			if(collided ==false)
 			{
-
-				playermovement1.collision_count++;
-				playermovement1.Collision_point = this.transform.position;
+				collided = true;
 				currentHealth -= 10.0f;
-				collided =true;
-				playermovement1.anim.SetBool (playermovement1.runHash,false);
-				playermovement1.anim.speed=0.0f;
 				//anim.StopPlayback("Run");
 				//anim.Play("Idle");
 				//anim.speed = 0.0f;
+				Instantiate (items [Random.Range (0, items.Length)],
+				             new Vector3 (this.transform.position.x, 0.45f,this.transform.position.z ),
+				             Quaternion.identity);
 			}
 			//Debug.Log("Collision");
 			if (currentHealth == 0) { 
 
 				Application.LoadLevel ("gameover");
 			}
+			playermovement1.collision_count++;
+			playermovement1.Collision_point = this.transform.position;
+			
+			collided =true;
+			playermovement1.anim.SetBool (playermovement1.runHash,false);
+			playermovement1.anim.speed=0.0f;
+
 
 			//rigidbody.transform.Translate(new Vector3(0.0f, 0.0f,-1.0f) * 10 * Time.deltaTime);
 			//Debug.Log(this.transform.position.z);
-			Instantiate (items [Random.Range (0, items.Length)], new Vector3 (this.transform.position.x, 0.45f,this.transform.position.z ), Quaternion.identity);
-			collided =false;
+
+
 			//anim.speed = -1.0f;
 
 

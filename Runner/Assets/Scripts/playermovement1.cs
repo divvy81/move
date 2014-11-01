@@ -15,7 +15,7 @@ public class playermovement1 : MonoBehaviour
 	
 	public static int score=0;
 	public static int count=5;
-	public static string life="X 5";
+	//public static string life="X 5";
 	public static float caldis=0.0f;
 	private bool left = true;
 	private bool right = false;
@@ -36,9 +36,9 @@ public class playermovement1 : MonoBehaviour
 	private GameObject girl;
 	public  static float seconds1=settttings.time11;
 	public static float seconds2= settttings.time11;
-	public float timer = 0.0f;
-	public int min = 0;
-	public int hrs=0;
+	public static float timer = 0.0f;
+	public static int min = 0;
+	public static int hrs=0;
 	public static string t;
 	public static Animator anim;
 	public static int runHash = Animator.StringToHash("Run");
@@ -286,15 +286,15 @@ public class playermovement1 : MonoBehaviour
 		GUI.Label (new Rect(Screen.width -150, Screen.height - 50,100,400), "" + Mathf.Round(caldis), style1);
 		GUI.Label (new Rect(Screen.width-200, Screen.height - 50,100,400),"M : ");
 		GUI.skin = myskin;
-		if (playermovement1.score == 0) 
-		{
-			scoreText = " X " + playermovement1.score;
-			life = "X "+ playermovement1.count;
-		}
+//		if (playermovement1.score == 0) 
+//		{
+			scoreText = " X " + PickUpScript.count;
+			//life = "X "+ playermovement1.count;
+//		}
 		GUI.Label(new Rect(0,25,80,80),scoreText);
 		//GUI.Label(new Rect(Screen.width-320,10,500,200),speedText);
 		//GUI.Label(new Rect(Screen.width/2-210,10,500,200),Distance);
-		GUI.Label (new Rect (5, 100, 80, 80), life);
+		//GUI.Label (new Rect (5, 100, 80, 80), life);
 		
 		
 		if (caldis > checkDistance && caldis < (checkDistance + 150.0f)) {
