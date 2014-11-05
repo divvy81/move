@@ -1,10 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\gameov.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\highscore.cs">
     <Files>
-      <File FileName="..\..\UnitySampleProjects\LoginTry\Assets\Scripts\LoginMenu.cs" Line="133" Column="3" />
+      <File FileName="Assets\Scripts\highscore.cs" Line="45" Column="7" />
+      <File FileName="..\..\UnitySampleProjects\LoginTry\Assets\Scripts\LoginMenu.cs" Line="49" Column="88" />
       <File FileName="Assets\Scripts\hscontroller.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\gameov.cs" Line="24" Column="4" />
+      <File FileName="Assets\Scripts\gameov.cs" Line="68" Column="42" />
+      <File FileName="Assets\Scripts\coindelete.cs" Line="19" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
