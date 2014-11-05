@@ -4,7 +4,7 @@ using System.Net;
 
 public class HS_controller : MonoBehaviour {
 
-
+/*
 
 	string login_url = "http://127.0.0.1/addscore.php";
 	string register_url= "http://127.0.0.1:3306/register.php";
@@ -83,5 +83,5 @@ public class HS_controller : MonoBehaviour {
 			
 		}
 	}
-
+*/
 }

@@ -19,6 +19,11 @@ public class gameov : MonoBehaviour {
 	string label ="Second Scene";
 	private bool showLabel = true;
 
+	string fetch_url= "http://127.0.0.1/previousscore.php";
+	int[] previous_score = new int[ 6 ];
+	//string label = "";
+
+
 	void Start () {
 		LeftCount=playermovement1.LeftCount.ToString();
 		RightCount=playermovement1.RightCount.ToString();
@@ -28,7 +33,9 @@ public class gameov : MonoBehaviour {
 		totalPlayedTime = playermovement1.hrs*60 + playermovement1.min;
 		average = (playermovement1.LeftCount + playermovement1.RightCount + playermovement1.UpCount + playermovement1.DownCount)/totalPlayedTime;
 
+		StartCoroutine(HandleFetch ());
 		StartCoroutine(SetScore());
+
 	}
 	public void ToggleLabel() {
 		showLabel = !showLabel;
@@ -54,6 +61,36 @@ public class gameov : MonoBehaviour {
 			score1 = playermovement3.score.ToString ();
 		}
 	}
+
+	IEnumerator HandleFetch()
+		
+	{
+		string username = hscontroller.username;
+		string fetch_URL = fetch_url + "?username=" + username;
+		
+		//string register_URL = register_url + "?username=" + userNamez + "&password=" + passWordz;
+		//Debug.Log (register_URL);
+		WWW fetchReader = new WWW(fetch_URL);
+		yield return fetchReader;
+		
+		
+		if(fetchReader.error != null)
+		{
+			Debug.Log (fetchReader.error);
+			label = "could not locate page";
+			
+		}else {
+			
+			Debug.Log(fetchReader.text);
+			IList temp = fetchReader.text.Split(' ');
+			for(int i=0;i<6;i++)
+			{
+				previous_score[i] = System.Convert.ToInt32(temp[i]);
+				//Debug.Log(previous_score[i]);
+			}
+		}
+	}
+
 
 	IEnumerator SetScore()
 	{
