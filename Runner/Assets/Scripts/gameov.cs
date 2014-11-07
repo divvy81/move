@@ -31,7 +31,7 @@ public class gameov : MonoBehaviour {
 		DownCount=playermovement1.DownCount.ToString();
 		score = PickUpScript.count.ToString ();
 		totalPlayedTime = playermovement1.hrs*60 + playermovement1.min;
-		average = (playermovement1.LeftCount + playermovement1.RightCount + playermovement1.UpCount + playermovement1.DownCount)/totalPlayedTime;
+		average = (playermovement1.LeftCount + playermovement1.RightCount + playermovement1.UpCount + playermovement1.DownCount)/(totalPlayedTime+1);
 
 		StartCoroutine(HandleFetch ());
 		StartCoroutine(SetScore());

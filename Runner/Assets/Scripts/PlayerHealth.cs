@@ -7,11 +7,13 @@ public class PlayerHealth : MonoBehaviour {
 	public float currentHealth = 10.0f;
 	public static bool collided=false;
 	public GameObject[] items; // for the fence around player.
+	public static bool ShowCollisionFence;
 	//Animator anim;
 	//int runHash = Animator.StringToHash("Run");
 	//int idleStateHash = Animator.StringToHash("Base Layer.Idle");
 	// Use this for initialization
 	void Start () {
+		collided = false;
 		//anim = GetComponent<Animator>();
 	}
 	
@@ -31,13 +33,17 @@ public class PlayerHealth : MonoBehaviour {
 				//anim.StopPlayback("Run");
 				//anim.Play("Idle");
 				//anim.speed = 0.0f;
-				Instantiate (items [Random.Range (0, items.Length)],
+				if(ShowCollisionFence)
+				{
+					Instantiate (items [Random.Range (0, items.Length)],
 				             new Vector3 (this.transform.position.x, 0.45f,this.transform.position.z ),
 				             Quaternion.identity);
+				}
 			}
 			//Debug.Log("Collision");
-			if (currentHealth == 0) { 
+			if (currentHealth == 0) {
 
+				collided = false;
 				Application.LoadLevel ("gameover");
 			}
 			playermovement1.collision_count++;

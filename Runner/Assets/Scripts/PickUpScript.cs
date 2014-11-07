@@ -10,6 +10,7 @@ public class PickUpScript : MonoBehaviour {
 
 	void Start()
 	{
+		count=0;
 		countText = this.guiText;
 		PickUpScript.SetCountText ();
 

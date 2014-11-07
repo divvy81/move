@@ -52,6 +52,14 @@ public class playermovement1 : MonoBehaviour
 	private float max_speed = 1.0f;
 	void Start()
 	{
+		PlayerHealth.ShowCollisionFence = true;
+		LeftCount = 0;
+		RightCount = 0;
+		UpCount = 0;
+		DownCount = 0;
+		timer = 0.0f;
+		min = 0;
+		hrs = 0;
 		max_distance_before_speed_upgrade = 200.0f;
 		anim = GetComponent<Animator>();
 		//animation.playAutomatically = true;
@@ -65,6 +73,7 @@ public class playermovement1 : MonoBehaviour
 	//junaid
 	void Update()
 	{
+		/*
 		if(Input.GetKeyUp("left"))
 			LeftCount++;
 		if(Input.GetKeyUp("right"))
@@ -72,7 +81,7 @@ public class playermovement1 : MonoBehaviour
 		if(Input.GetKeyUp("up"))
 			UpCount++;
 		if(Input.GetKeyUp("down"))
-			DownCount++;
+			DownCount++;*/
 		if (this.transform.position.z - start_distance_for_speed_upgrade > max_distance_before_speed_upgrade) {
 						check_speed_upgrade ();
 				}
@@ -94,11 +103,11 @@ public class playermovement1 : MonoBehaviour
 	{
 		if (collision_count == 0) {
 				//upgrade_speed
-			anim.speed += 0.04f;
+			anim.speed += 0.10f;
 			max_speed = anim.speed;
 		} else {
 				// player is colliding, degrade speed
-			anim.speed -= 0.04f;
+			anim.speed -= 0.10f;
 		}
 		start_distance_for_speed_upgrade = this.transform.position.z;
 	}
@@ -120,14 +129,14 @@ public class playermovement1 : MonoBehaviour
 			seconds2=settttings.time11;
 			if (Mathf.Round (seconds1) == 0) {
 				Time.timeScale = 0;
-				paused = true;
+				//paused = true;
 			}
 		} else if (gameObject.transform.position.x < 4) {
 			seconds2 -= Time.deltaTime;
 			seconds1 = settttings.time11;
 			if (Mathf.Round (seconds2) == 0) {
 				Time.timeScale =0 ;
-				paused= true;
+				//paused= true;
 				
 			}
 		}
@@ -164,7 +173,7 @@ public class playermovement1 : MonoBehaviour
 			}*/
 		//rigidbody.AddRelativeForce (0, 0, speed);
 		//	}
-		vari = -2;
+		//vari = -2;
 		if( (Mathf.Round (vari) > 1)&& start== true) {
 			anim.SetBool (runHash,false);
 			//anim.SetBool (idleHash,true);
@@ -198,10 +207,13 @@ public class playermovement1 : MonoBehaviour
 		
 		
 		
-		if ((ch == 1 && (left == false) || Input.GetKey(KeyCode.LeftArrow )) && vari < -1) {
+		if (((HardwareInput.give_output[2] == true) && (left == false)) || ((Input.GetKey(KeyCode.LeftArrow ))  && (left == false)) && vari < -1) {
 			seconds-=Time.deltaTime;
-			
-			rigidbody.transform.Translate(new Vector3(-1.0f, 0, 0) * 10 * Time.deltaTime);
+			LeftCount++;
+			while(this.transform.position.x > 3.0f)
+			{
+				rigidbody.transform.Translate(new Vector3(-1.0f, 0, 0) * 10 * Time.deltaTime);
+			}
 			leftturn++;
 			left = true;
 			right = false;
@@ -209,34 +221,38 @@ public class playermovement1 : MonoBehaviour
 			}
 			
 		} 
-		else if ((ch == 2 && (right == false) || Input.GetKey(KeyCode.RightArrow) ) && vari < -1) {
+		else if (((HardwareInput.give_output[3] == true) && (right == false)) || ((Input.GetKey(KeyCode.RightArrow)) && (right == false) ) && vari < -1) {
 			
 			seconds-=Time.deltaTime;
-			rigidbody.transform.Translate(new Vector3(1.0f, 0, 0) * 10 * Time.deltaTime);
+			RightCount++;
+			while(this.transform.position.x < 4.90f)
+			{
+				rigidbody.transform.Translate(new Vector3(1.0f, 0, 0) * 10 * Time.deltaTime);
+			}
 			rightturn++;
 			left = false;
 			right = true;
 			
 			
 		}
-		if((Input.GetKeyUp(KeyCode.DownArrow)== true)&& (anim.GetBool(runHash)==false)  && (start==false)
+		if(((Input.GetKeyUp(KeyCode.DownArrow)== true)|| (HardwareInput.give_output[4] == true))&& (anim.GetBool(runHash)==false)  && (start==false)
 		   && moving_back == false)// run=false and idle=true and downarrow press
 		{
 
 			anim.speed = -0.5f;
 			anim.SetBool (runHash,true);
 
-
+			DownCount++;
 
 			//rigidbody.transform.Translate(new Vector3(0.0f, 0, -0.5f) );
 			moving_back = true;
 		}
-		if((Input.GetKeyUp(KeyCode.UpArrow)== true)&& (anim.GetBool(runHash)==false) )// run=false and idle=true and downarrow press
+		if(((Input.GetKeyUp(KeyCode.UpArrow)== true)||(HardwareInput.give_output[3] == true))&& (anim.GetBool(runHash)==false) )// run=false and idle=true and downarrow press
 		{
 			//anim.SetBool (movingBackHash,false);
 			//anim.SetBool (movingFrontHash,true);
 			anim.speed = max_speed;
-
+			UpCount++;
 			anim.SetBool (runHash,true);
 			//rigidbody.transform.Translate(new Vector3(0.0f, 0, 0.5f));
 
@@ -302,7 +318,7 @@ public class playermovement1 : MonoBehaviour
 			GUI.color = Color.white;
 			GUI.contentColor = Color.black;
 			//windowRect = GUI.Window (0, windowRect, doWindow,"Checkpoint!");
-			GUI.Box(new Rect(Screen.width/2 - 60, 40, 120, 40),"Checkpoint!!");
+			//GUI.Box(new Rect(Screen.width/2 - 60, 40, 120, 40),"Checkpoint!!");
 			
 			check = true;
 			GUI.skin = myskin;

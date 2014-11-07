@@ -15,14 +15,21 @@ public class playerstats : MonoBehaviour {
 	public Font font;
 	public GUIStyle mystyle;
 	public GUISkin mystyle1;
-	public static string highscore1Url="http://localhost/display2.php";
+	public static string statsurl="http://localhost/stats.php";
 	public static string[] Line1 = new string[35];
 	public static int i;
+	//GUIText stats;
 
-	void start()
+	void Start()
 	{
-				getScores (DelegateMenu.playerName);
-		}
+		//stats.text = "Loading...";		
+		StartCoroutine(getScores (DelegateMenu.playerName));
+		guiText.tabSize = 40;
+		guiText.alignment = TextAlignment.Left;
+		guiText.fontSize = 16;
+		guiText.richText = true;
+				
+	}
 
 
 
@@ -78,10 +85,13 @@ public class playerstats : MonoBehaviour {
 		GUI.Label (new Rect (1140, 470, 200, 60), Line1 [24]);
 		*/
        
+		if(GUI.Button(new Rect (1100,20,200,60),"BACK"))
+		{
+			Application.LoadLevel("start");
+		}
+		//GUI.Label(new Rect (380,0,200,150),"Loading",mystyle);
 
-
-
-
+/*
 
 		GUI.Label(new Rect (380,0,200,150),"Player Stats",mystyle);
 		GUI.Label(new Rect (10,120,200,80),"S.NO.");
@@ -92,10 +102,7 @@ public class playerstats : MonoBehaviour {
 		GUI.Label(new Rect (980, 120, 200, 80), "RightTurn");
 		GUI.Label(new Rect (1210, 120, 200, 80), "TimePlay");
 		GUI.Label(new Rect (1450, 120, 200, 80), "Date");
-		if(GUI.Button(new Rect (1100,20,200,60),"BACK"))
-		{
-			Application.LoadLevel("start");
-		}
+
 		GUI.Label(new Rect (30,190,120,60),"1.");
 		GUI.Label(new Rect (160,190,250,60),Line1[0]);
 		//Debug.Log(Line1[0]);
@@ -139,16 +146,30 @@ public class playerstats : MonoBehaviour {
 		GUI.Label(new Rect(1240, 470, 200,60),Line1[33]);
 		GUI.Label (new Rect (1450, 470, 400, 60), Line1 [34]);
 
-
+*/
 		}
 
-	public static void getScores(string username) 
+	IEnumerator getScores(string username) 
 	{
-		//gameObject.guiText.text = "Loading Scores";
-		
-		string highscore_Url = highscore1Url + "?username=" + username;
-		
-		
+		//stats.text = "Loading Scores...";
+		//string username = hscontroller.username;
+		Debug.Log ("username=" + username);
+		string stats_URL = statsurl + "?username=" + username;
+
+		WWW statsReader = new WWW(stats_URL);
+		yield return statsReader;
+
+		if (statsReader.error != null)
+		{
+			Debug.Log(statsReader.error);
+		}
+		else
+		{
+			Debug.Log (statsReader.text);
+			this.guiText.text = statsReader.text; // this is a GUIText that will display the scores in game.
+		}
+		/*
+
 		HttpWebRequest connection =
 			(HttpWebRequest)HttpWebRequest.Create(highscore_Url);
 		
@@ -164,7 +185,7 @@ public class playerstats : MonoBehaviour {
 				Debug.Log (Line1[i]);
 			}
 		}
-		
+		*/
 		
 		
 		

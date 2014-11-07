@@ -24,6 +24,12 @@ public class GameObjectController : MonoBehaviour {
 	// Use this for initialization
 	
 	// Update is called once per frame
+	void Start()
+	{
+		last_object_z_position=24.0f;
+		next_object_distance= 10.0f;
+		track_counter = 1;
+	}
 	void Update () {
 		UpdateItems ();
 		UpdateTracks ();

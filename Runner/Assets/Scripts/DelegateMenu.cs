@@ -95,10 +95,12 @@ public class DelegateMenu : MonoBehaviour {
 			GUILayout.BeginHorizontal ();
 			GUILayout.Space (50);
 			if (GUILayout.Button ("Exit", GUI.skin.FindStyle ("Button"), GUILayout.MaxWidth (100)))
-				Application.Quit ();
+			{
+				Application.Quit();
+			}
 			if (GUILayout.Button ("OK", GUI.skin.FindStyle ("Button"), GUILayout.MaxWidth (100))) {
 				PlayerPrefs.SetString ("playerName", playerName);
-				playerstats.getScores(playerName);
+				//playerstats.getScores(playerName);
 				Application.LoadLevel("stats");
 			}
 			GUILayout.Space(50);

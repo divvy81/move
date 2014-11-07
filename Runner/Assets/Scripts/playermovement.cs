@@ -43,6 +43,7 @@ public class playermovement : MonoBehaviour
 	{Debug.Log("valuse fo seconf "+seconds1);
 
 		sp.ReadTimeout = 1;
+		PlayerHealth.ShowCollisionFence = false;
 //		sp.Open();
 
 
