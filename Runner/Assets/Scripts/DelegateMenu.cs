@@ -261,7 +261,7 @@ public class DelegateMenu : MonoBehaviour {
 			//Debug.Log("last vlaue" + playermovement.count) ;
 			if(AvatarIndex == 0&& settttings.refe==0){
 				lev=1;
-				Application.LoadLevel("level01");}
+				Application.LoadLevel("level02");}
 			else if(AvatarIndex == 0&& settttings.refe==1){
 				lev=3;
 			

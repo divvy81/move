@@ -43,7 +43,7 @@ public class playermovement : MonoBehaviour
 	{Debug.Log("valuse fo seconf "+seconds1);
 
 		sp.ReadTimeout = 1;
-		PlayerHealth.ShowCollisionFence = false;
+//		PlayerHealth.ShowCollisionFence = false;
 //		sp.Open();
 
 
@@ -77,19 +77,19 @@ public class playermovement : MonoBehaviour
 				Debug.Log (settttings.time11);//me
 				seconds1 -= Time.deltaTime;
 				seconds2=settttings.time11;
-				if (Mathf.Round (seconds1) == 0) {
+				/*if (Mathf.Round (seconds1) == 0) {
 					Time.timeScale = 0;
 					paused = true;
-				}
+				}*/
 			} else if (gameObject.transform.position.x < 4) {
 				Debug.Log (Time.deltaTime + " less than 4 " +  " " + seconds1);// me
 				Debug.Log (settttings.time11);//me
 				seconds2 -= Time.deltaTime;
 				seconds1 = settttings.time11;
-				if (Mathf.Round (seconds2) == 0) {
+				/*if (Mathf.Round (seconds2) == 0) {
 					Time.timeScale = 0;
 					paused = true;
-				}
+				}*/
 			}
 		
 
@@ -216,7 +216,7 @@ public class playermovement : MonoBehaviour
 						GUI.color = Color.white;
 			GUI.contentColor = Color.black;
 						//windowRect = GUI.Window (0, windowRect, doWindow,"Checkpoint!");
-			GUI.Box(new Rect(Screen.width/2 - 60, 40, 120, 40),"Checkpoint!!");
+			//GUI.Box(new Rect(Screen.width/2 - 60, 40, 120, 40),"Checkpoint!!");
 
 						check = true;
 			GUI.skin = myskin;

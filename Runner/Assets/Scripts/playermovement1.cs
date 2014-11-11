@@ -17,8 +17,8 @@ public class playermovement1 : MonoBehaviour
 	public static int count=5;
 	//public static string life="X 5";
 	public static float caldis=0.0f;
-	private bool left = true;
-	private bool right = false;
+	public static bool left = true;
+	public static bool right = false;
 	public GUISkin theskin;
 	public GUISkin myskin ;
 	//public float maxspeed = 30.0f;
@@ -50,8 +50,15 @@ public class playermovement1 : MonoBehaviour
 	//junaid
 	public static int LeftCount,RightCount,DownCount,UpCount;
 	private float max_speed = 1.0f;
+	public static bool can_move_left,can_move_right,can_move_up,can_move_down;
+
 	void Start()
 	{
+		can_move_left = false;
+		can_move_right = true;
+		can_move_up = false;
+		can_move_down = false;
+
 		PlayerHealth.ShowCollisionFence = true;
 		LeftCount = 0;
 		RightCount = 0;
@@ -83,30 +90,38 @@ public class playermovement1 : MonoBehaviour
 		if(Input.GetKeyUp("down"))
 			DownCount++;*/
 		if (this.transform.position.z - start_distance_for_speed_upgrade > max_distance_before_speed_upgrade) {
-						check_speed_upgrade ();
-				}
+			check_speed_upgrade ();
+		}
 		if ((Collision_point.z - this.transform.position.z >= 4.0f) && (moving_back == true)){
-		
+			
 			anim.speed=1.0f;
 			anim.SetBool (runHash,false);
 			anim.Play("Idle");
 			moving_back = false;
+			if(this.transform.position.x > 4.0f)
+			{
+				can_move_left=true;
+			}
+			else
+			{
+				can_move_right=true;
+			}
+			can_move_up=true;
 		}
 		/*if ((Collision_point.z - this.transform.position.z >= 1.0f) && 
 		 	(Collision_point.z - this.transform.position.z <= -3.0f)) {
 			anim.SetBool (runHash,true);
-
 			anim.speed = max_speed;
 		}*/
 	}
 	void check_speed_upgrade()
 	{
 		if (collision_count == 0) {
-				//upgrade_speed
+			//upgrade_speed
 			anim.speed += 0.10f;
 			max_speed = anim.speed;
 		} else {
-				// player is colliding, degrade speed
+			// player is colliding, degrade speed
 			anim.speed -= 0.10f;
 		}
 		start_distance_for_speed_upgrade = this.transform.position.z;
@@ -206,9 +221,11 @@ public class playermovement1 : MonoBehaviour
 		float myDrag = Mathf.Lerp (currentDrag, maxDrag, dragLerpTime);
 		
 		
-		
-		if (((HardwareInput.give_output[2] == true) && (left == false)) || ((Input.GetKey(KeyCode.LeftArrow ))  && (left == false)) && vari < -1) {
-			seconds-=Time.deltaTime;
+		Debug.Log ("k=" + can_move_left + " " + can_move_right + " " + can_move_down + " " + can_move_up);
+		if (((HardwareInput.give_output[2] == true) && (can_move_left)) || ((Input.GetKey(KeyCode.LeftArrow ))  && (can_move_left)) && vari < -1) {
+			//seconds-=Time.deltaTime;
+			can_move_left =false;
+			can_move_right =true;
 			LeftCount++;
 			while(this.transform.position.x > 3.0f)
 			{
@@ -217,13 +234,14 @@ public class playermovement1 : MonoBehaviour
 			leftturn++;
 			left = true;
 			right = false;
-			if(Mathf.Round(seconds)<=0){
-			}
+
 			
 		} 
-		else if (((HardwareInput.give_output[3] == true) && (right == false)) || ((Input.GetKey(KeyCode.RightArrow)) && (right == false) ) && vari < -1) {
+		else if (((HardwareInput.give_output[3] == true) && (can_move_right)) || ((Input.GetKey(KeyCode.RightArrow)) && (can_move_right) ) && vari < -1) {
 			
-			seconds-=Time.deltaTime;
+			//seconds-=Time.deltaTime;
+			can_move_left =true;
+			can_move_right =false;
 			RightCount++;
 			while(this.transform.position.x < 4.90f)
 			{
@@ -235,27 +253,29 @@ public class playermovement1 : MonoBehaviour
 			
 			
 		}
-		if(((Input.GetKeyUp(KeyCode.DownArrow)== true)|| (HardwareInput.give_output[4] == true))&& (anim.GetBool(runHash)==false)  && (start==false)
+		if(((Input.GetKey(KeyCode.DownArrow)== true)|| (HardwareInput.give_output[4] == true))&& (can_move_down)  && (start==false)
 		   && moving_back == false)// run=false and idle=true and downarrow press
 		{
 
+			can_move_down=false;
 			anim.speed = -0.5f;
 			anim.SetBool (runHash,true);
-
+			
 			DownCount++;
-
+			
 			//rigidbody.transform.Translate(new Vector3(0.0f, 0, -0.5f) );
 			moving_back = true;
 		}
-		if(((Input.GetKeyUp(KeyCode.UpArrow)== true)||(HardwareInput.give_output[3] == true))&& (anim.GetBool(runHash)==false) )// run=false and idle=true and downarrow press
+		if(((Input.GetKey(KeyCode.UpArrow)== true)||(HardwareInput.give_output[1] == true))&& (can_move_up) && (start==false) )// run=false and idle=true and downarrow press
 		{
 			//anim.SetBool (movingBackHash,false);
 			//anim.SetBool (movingFrontHash,true);
+			can_move_up=false;
 			anim.speed = max_speed;
 			UpCount++;
 			anim.SetBool (runHash,true);
 			//rigidbody.transform.Translate(new Vector3(0.0f, 0, 0.5f));
-
+			
 			//anim.Play("Run");
 		}
 		speedText = "Speed :" +speed +"km/h";
@@ -302,11 +322,11 @@ public class playermovement1 : MonoBehaviour
 		GUI.Label (new Rect(Screen.width -150, Screen.height - 50,100,400), "" + Mathf.Round(caldis), style1);
 		GUI.Label (new Rect(Screen.width-200, Screen.height - 50,100,400),"M : ");
 		GUI.skin = myskin;
-//		if (playermovement1.score == 0) 
-//		{
-			scoreText = " X " + PickUpScript.count;
-			//life = "X "+ playermovement1.count;
-//		}
+		//		if (playermovement1.score == 0) 
+		//		{
+		scoreText = " X " + PickUpScript.count;
+		//life = "X "+ playermovement1.count;
+		//		}
 		GUI.Label(new Rect(0,25,80,80),scoreText);
 		//GUI.Label(new Rect(Screen.width-320,10,500,200),speedText);
 		//GUI.Label(new Rect(Screen.width/2-210,10,500,200),Distance);

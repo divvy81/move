@@ -23,10 +23,11 @@ public class HardwareInput : MonoBehaviour {
  */
 
 
-	SerialPort sp = new SerialPort("COM4", 9600);
+	public static SerialPort sp = new SerialPort("COM4", 9600);
 	int ch;
 	// Use this for initialization
 	void Start () {
+		ch = 0;
 		int i;
 		for (i=1; i<=Total_serial_ports; i++) {
 			serialPort[i] = 0;
@@ -45,6 +46,10 @@ public class HardwareInput : MonoBehaviour {
 		//sp.Write ("9");
 		//Debug.Log ("heai");
 	}
+	public static void closeit()
+	{
+		HardwareInput.sp.Close ();
+	}
 	void FixedUpdate () {
 
 		if (sp.IsOpen) 
@@ -53,6 +58,7 @@ public class HardwareInput : MonoBehaviour {
 		try {
 			
 				ch = sp.ReadByte ();
+				Debug.Log(ch);
 			} 
 			catch (System.Exception) 
 			{
@@ -73,11 +79,11 @@ public class HardwareInput : MonoBehaviour {
 								}
 								serialPort [ch]++;
 								serialPort [5] = ch;
-								if (serialPort [ch] >= 20) {
+								if (serialPort [ch] >= 1) {
 										give_output [ch] = true;
 								}
 						}
-						Debug.Log (give_output [1] + " " + give_output [2] + " " + give_output [3] + " " + give_output [4] + " ");
+						Debug.Log ("hardware="+give_output [1] + " " + give_output [2] + " " + give_output [3] + " " + give_output [4] + " ");
 				}
 		}
 	/*void check_move_direction()

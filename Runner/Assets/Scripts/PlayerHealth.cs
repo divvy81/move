@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO.Ports;
 
 public class PlayerHealth : MonoBehaviour {
 	private GUIStyle currentStyle = null;	
@@ -26,10 +27,12 @@ public class PlayerHealth : MonoBehaviour {
 
 		Debug.Log (other);
 		if (other.gameObject.tag == "Obstacle") {
-			if(collided ==false)
+			if(collided == false)
 			{
 				collided = true;
 				currentHealth -= 10.0f;
+
+//				playermovement1.anim.GetBool(playermovement1.runHash)=true;
 				//anim.StopPlayback("Run");
 				//anim.Play("Idle");
 				//anim.speed = 0.0f;
@@ -40,9 +43,15 @@ public class PlayerHealth : MonoBehaviour {
 				             Quaternion.identity);
 				}
 			}
+			playermovement1.can_move_left =false;
+			playermovement1.can_move_right =false;
+			playermovement1.can_move_down =true;
+			playermovement1.can_move_up = false;
+//			playermovement1.left=true;
+//			playermovement1.right=true;
 			//Debug.Log("Collision");
 			if (currentHealth == 0) {
-
+				HardwareInput.closeit();
 				collided = false;
 				Application.LoadLevel ("gameover");
 			}
